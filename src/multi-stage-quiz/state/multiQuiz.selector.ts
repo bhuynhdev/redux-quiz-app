@@ -15,8 +15,14 @@ export const useQuizSelector: TypedUseSelectorHook<MultiStageQuizState> = (
   selectorFn
 ) => useAppSelector(createSelector(selectQuiz, selectorFn));
 
-export const selectCurrentQuestion = createQuizSelector(
-  (quiz) => quiz.currrentQuestionNum
+export const selectCurrentQuestionNum = createQuizSelector(
+  (quiz) => quiz.questionNum
+);
+
+export const seletCurrentQuestion = createQuizSelector((quiz) => quiz.question);
+
+export const selectIsUserCorrect = createQuizSelector(
+  (quiz) => quiz.isUserCorrect
 );
 
 export default useQuizSelector;

@@ -1,5 +1,5 @@
 declare module "quizData.json" {
-  import { QuestionData } from "common/types/globals";
-  const value: QuestionData;
+  import { Questions } from "common/types/globals";
+  const value: Questions;
   export default value;
 }

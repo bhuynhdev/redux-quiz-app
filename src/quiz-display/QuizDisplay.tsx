@@ -1,17 +1,23 @@
-import allQuizzes from "quizData.json";
+import { Question } from "common/types/globals";
 import { MultipleChoiceQuizDisplay } from "./MultiChoiceQuiz/MultiChoiceQuizDisplay";
 import { TextQuizDisplay } from "./TextQuiz/TextQuizDisplay";
 
 interface QuizDisplayProps {
-  questionNumber: number;
+  question: Question | null;
 }
 
-export const QuizDisplay: React.FC<QuizDisplayProps> = ({ questionNumber }) => {
-  const currentQuestion = allQuizzes[questionNumber - 1];
-  const { type } = currentQuestion;
-  if (type == "multiplechoice") {
-    return <MultipleChoiceQuizDisplay {...currentQuestion} />;
-  } else {
-    return <TextQuizDisplay {...currentQuestion} />;
+export const QuizDisplay: React.FC<QuizDisplayProps> = ({ question }) => {
+  if (!question) {
+    return <div>Loading...</div>;
+  }
+  const { type } = question;
+
+  switch (type) {
+    case "multiplechoice":
+      return <MultipleChoiceQuizDisplay {...question} />;
+    case "text":
+      return <TextQuizDisplay {...question} />;
+    default:
+      return null;
   }
 };

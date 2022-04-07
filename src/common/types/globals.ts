@@ -12,4 +12,6 @@ export interface TextQuestion {
   answer: string;
 }
 
-export type QuestionData = (MultipleChoiceQuestion | TextQuestion)[];
+export type Question = MultipleChoiceQuestion | TextQuestion;
+
+export type Questions = Question[];
