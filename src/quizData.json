@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Odd one out",
+    "type": "multiplechoice",
+    "choices": [
+      {
+        "label": "Orange"
+      },
+      {
+        "label": "Purple"
+      },
+      {
+        "label": "Black"
+      }
+    ],
+    "answer": 2
+  },
+  {
+    "title": "Find the common concept",
+    "type": "text",
+    "clues": [
+      {
+        "label": "Hope"
+      },
+      {
+        "label": "Peace"
+      },
+      {
+        "label": "War"
+      }
+    ],
+    "answer": "book"
+  }
+]
