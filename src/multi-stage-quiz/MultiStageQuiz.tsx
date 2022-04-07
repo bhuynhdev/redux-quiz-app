@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from "hooks";
-import { QuizDisplay } from "./QuizDisplay";
+import { QuizDisplay } from "../quiz-display/QuizDisplay";
 import { actions, selectors } from "./state";
 
 export const MultiStageQuiz: React.FC = () => {
   const dispatch = useAppDispatch();
-  const currentQuestion = useAppSelector(selectors.selectCurrentQuestion);
+  const currentQuestionNumber = useAppSelector(selectors.selectCurrentQuestion);
 
   const handleNextQuestion = () => {
     dispatch(actions.goNextQuestion());
@@ -12,7 +12,8 @@ export const MultiStageQuiz: React.FC = () => {
 
   return (
     <>
-      <QuizDisplay questionNumber={currentQuestion} />
+      <h1>Question {currentQuestionNumber}</h1>
+      <QuizDisplay questionNumber={currentQuestionNumber} />
       <button type="button" onClick={handleNextQuestion}>
         Next
       </button>
