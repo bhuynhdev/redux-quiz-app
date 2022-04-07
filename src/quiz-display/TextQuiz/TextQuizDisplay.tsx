@@ -1,11 +1,16 @@
 import { TextQuestion } from "common/types/globals";
+import { QuizDisplayProps } from "quiz-display/QuizDisplay";
 
-interface TextQuizDisplayProps extends TextQuestion {}
+interface TextQuizDisplayProps extends QuizDisplayProps {
+  question: TextQuestion;
+}
 
 export const TextQuizDisplay: React.FC<TextQuizDisplayProps> = ({
-  title,
-  clues,
+  question,
+  userAnswer,
+  setUserAnswer,
 }) => {
+  const { title, clues } = question;
   return (
     <>
       <h3>Text question: {title}</h3>
@@ -14,7 +19,13 @@ export const TextQuizDisplay: React.FC<TextQuizDisplayProps> = ({
           <p key={i}>{label}</p>
         ))}
       </div>
-      <input type="text" name="answer" id="answer" />
+      <input
+        type="text"
+        name="answer"
+        id="answer"
+        value={userAnswer}
+        onChange={(e) => setUserAnswer(e.target.value)}
+      />
     </>
   );
 };

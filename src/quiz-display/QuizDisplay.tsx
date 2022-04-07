@@ -2,11 +2,17 @@ import { Question } from "common/types/globals";
 import { MultipleChoiceQuizDisplay } from "./MultiChoiceQuiz/MultiChoiceQuizDisplay";
 import { TextQuizDisplay } from "./TextQuiz/TextQuizDisplay";
 
-interface QuizDisplayProps {
+export interface QuizDisplayProps {
   question: Question | null;
+  userAnswer: Question["answer"];
+  setUserAnswer: React.Dispatch<React.SetStateAction<string | number>>;
 }
 
-export const QuizDisplay: React.FC<QuizDisplayProps> = ({ question }) => {
+export const QuizDisplay: React.FC<QuizDisplayProps> = ({
+  question,
+  userAnswer,
+  setUserAnswer,
+}) => {
   if (!question) {
     return <div>Loading...</div>;
   }
@@ -14,9 +20,21 @@ export const QuizDisplay: React.FC<QuizDisplayProps> = ({ question }) => {
 
   switch (type) {
     case "multiplechoice":
-      return <MultipleChoiceQuizDisplay {...question} />;
+      return (
+        <MultipleChoiceQuizDisplay
+          question={question}
+          userAnswer={userAnswer}
+          setUserAnswer={setUserAnswer}
+        />
+      );
     case "text":
-      return <TextQuizDisplay {...question} />;
+      return (
+        <TextQuizDisplay
+          question={question}
+          userAnswer={userAnswer}
+          setUserAnswer={setUserAnswer}
+        />
+      );
     default:
       return null;
   }
