@@ -4,15 +4,19 @@ import { Question } from "common/types/globals";
 import allQuizes from "quizData.json";
 
 export interface MultiStageQuizState {
-  questionNum: number;
+  questionNum: number; // start at 1
   question: Question | null;
   isUserCorrect: boolean;
+  isUserWinner: boolean;
+  wrongCount: number;
 }
 
 const initialState: MultiStageQuizState = {
   questionNum: 1,
   question: allQuizes[0],
   isUserCorrect: false,
+  isUserWinner: false,
+  wrongCount: 0,
 };
 
 export const multiStageQuizSlice = createSlice({
@@ -28,11 +32,18 @@ export const multiStageQuizSlice = createSlice({
       const userAnswer = action.payload;
       if (userAnswer === correctAnswer) {
         state.isUserCorrect = true;
+        state.isUserWinner = state.questionNum === allQuizes.length;
+      } else {
+        state.isUserCorrect = false;
+        state.wrongCount++;
       }
     },
     goNextQuestion(state) {
       state.isUserCorrect = false;
       state.questionNum = 1 + (state.questionNum % allQuizes.length);
+    },
+    reset() {
+      return initialState;
     },
   },
 });

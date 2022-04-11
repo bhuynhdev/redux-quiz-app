@@ -19,6 +19,8 @@ export const TextQuizDisplay: React.FC<TextQuizDisplayProps> = ({
           <p key={i}>{label}</p>
         ))}
       </div>
+      <hr />
+      <label htmlFor="answer">Your answer:</label>
       <input
         type="text"
         name="answer"

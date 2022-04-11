@@ -13,6 +13,8 @@ export const MultiStageQuiz: React.FC = () => {
   );
   const currentQuestion = useAppSelector((state) => state.quiz.question);
   const isUserCorrect = useAppSelector(selectors.selectIsUserCorrect);
+  const wrongCount = useAppSelector(selectors.selectWrongCount);
+  const isUserWinner = useAppSelector(selectors.selectIsUserWinner);
 
   useEffect(() => {
     dispatch(actions.fetchQuestion());
@@ -22,6 +24,26 @@ export const MultiStageQuiz: React.FC = () => {
     dispatch(actions.goNextQuestion());
     setUserAnswer("");
   };
+
+  const resetWholeQuiz = () => {
+    dispatch(actions.reset());
+    setUserAnswer("");
+  };
+
+  const NextButton = () => (
+    <button type="button" onClick={handleNextQuestion}>
+      Next
+    </button>
+  );
+
+  const ResetButton = () => (
+    <>
+      <p>✨ You won ✨</p>
+      <button type="button" onClick={resetWholeQuiz}>
+        Reset the game
+      </button>
+    </>
+  );
 
   return (
     <>
@@ -37,11 +59,8 @@ export const MultiStageQuiz: React.FC = () => {
       >
         SUBMIT
       </button>
-      {isUserCorrect && (
-        <button type="button" onClick={handleNextQuestion}>
-          Next
-        </button>
-      )}
+      <p>You WRONG: {wrongCount} times</p>
+      {isUserWinner ? <ResetButton /> : isUserCorrect && <NextButton />}
     </>
   );
 };

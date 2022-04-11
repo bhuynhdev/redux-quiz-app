@@ -11,7 +11,7 @@ type QuizSelector<ReturnType> = (state: MultiStageQuizState) => ReturnType;
 const createQuizSelector = <TSelected>(fn: QuizSelector<TSelected>) =>
   createSelector(selectQuiz, fn);
 
-export const useQuizSelector: TypedUseSelectorHook<MultiStageQuizState> = (
+const useQuizSelector: TypedUseSelectorHook<MultiStageQuizState> = (
   selectorFn
 ) => useAppSelector(createSelector(selectQuiz, selectorFn));
 
@@ -23,6 +23,12 @@ export const seletCurrentQuestion = createQuizSelector((quiz) => quiz.question);
 
 export const selectIsUserCorrect = createQuizSelector(
   (quiz) => quiz.isUserCorrect
+);
+
+export const selectWrongCount = createQuizSelector((quiz) => quiz.wrongCount);
+
+export const selectIsUserWinner = createQuizSelector(
+  (quiz) => quiz.isUserWinner
 );
 
 export default useQuizSelector;
